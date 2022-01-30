@@ -1,21 +1,25 @@
 import { Server } from 'http';
-import x from 'express';
+import express from 'express';
 import dot from 'dotenv'
+import m from 'mongoose';
+import appSrc from './app.js'
+import CORS from './CORS.js'
+import UserModel from './models/User.js'
+import bodyParser from 'body-parser'
 
 dot.config({path: './.env'});
 const {URL} = process.env;
-
-console.log(URL);
+const User = UserModel(m);
+const app = appSrc(express, bodyParser, CORS, User);
 
 const PORT = 4321;
-const { log } = console;
-const hu = { 'Content-Type': 'text/html; charset=utf-8' };
-const app = x();
-const mw0 = (r, rs, n) => rs.status(200).set(hu) && n();
 
-app
-  .use(mw0)
-  .get('/', r => r.res.send('dfgds'));
-
-export default Server(app)
-  .listen(process.env.PORT || PORT, () => log(process.pid));
+try {
+  await m.connect(URL, {useNewUrlParser: true,
+    useUnifiedTopology: true });
+    
+  Server(app)
+    .listen(process.env.PORT || PORT); 
+} catch(e) {
+  console.log(e.codeName);
+}
