@@ -4,13 +4,13 @@ import dot from 'dotenv'
 import m from 'mongoose';
 import appSrc from './app.js'
 import CORS from './CORS.js'
-import UserModel from './models/User.js'
+import NumberModel from './models/Number.js'
 import bodyParser from 'body-parser'
 
 dot.config({path: './.env'});
 const {URL} = process.env;
-const User = UserModel(m);
-const app = appSrc(express, bodyParser, CORS, User);
+const Num = NumberModel(m);
+const app = appSrc(express, bodyParser, CORS, Num);
 
 const PORT = 4321;
 

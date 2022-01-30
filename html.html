@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HW02_static</title><meta charset="utf-8">
+    </head>
+    <body>
+        <div>
+            Значение: <input type="text" name="number" id = "number">
+        </div> 
+        <div>
+          <button id = "button">Send number</button>
+        </div><br>
+        <div id = "num_window" ></div>
+        <script>
+            document.querySelector("#button").onclick = async function(){
+                var num = document.getElementById("number").value;
+                var num_window = document.getElementById("num_window");
+
+                var params = new URLSearchParams('number=' + num);
+
+                let response = await fetch('https://cors-anywere.herokuapp.com/' + 'https://stormy-lowlands-76650.herokuapp.com/', {
+                    method: 'POST',
+                    body: params
+                });
+
+                let result = await response.text();
+
+                num_window.textContent = result + 1;
+            }
+        </script>
+    </body>
+</html>
