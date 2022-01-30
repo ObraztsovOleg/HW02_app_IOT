@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "ObraztsovOleg <olegrasputina@gmail.com>",
   "license": "ISC",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
