@@ -11,10 +11,11 @@ export default (express, bodyParser, CORS, Num) => {
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
 
         for (var obj in bd_data) {
-          if (bd[obj]["number"] == number) is_in_bd = true; 
+          if (bd_data[obj]["number"] == number) is_in_bd = true; 
         } 
 
         const newNum = new Num({ number });
+        
         if (is_in_bd) {
           try {
             await newNum.save(); 
@@ -23,6 +24,7 @@ export default (express, bodyParser, CORS, Num) => {
             res.status(400).send('Your request is not correct');
           }
         } else {
+
           res.send("You've already sent this number");
         }
 
