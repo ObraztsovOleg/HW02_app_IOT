@@ -24,8 +24,12 @@
                 });
 
                 let result = await response.text();
+                if (!isNaN(Number(text))) {
+                    num_window.textContent = Number(result) + 1;
+                } else {
+                    num_window.textContent = result;
+                }
 
-                num_window.textContent = result + 1;
             }
         </script>
     </body>

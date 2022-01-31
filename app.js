@@ -19,13 +19,15 @@ export default (express, bodyParser, CORS, Num) => {
       
           try {
             await newNum.save(); 
-            res.status(201).send(bd_data[0]['number']);
+            // res.status(201).send(bd_data[0]['number']);
+            res.send(is_in_bd);
           }catch(e) {
             res.status(400).send('Your request is not correct');
           }
         } else {
 
-          res.send("You've already sent this number");
+          // res.send("You've already sent this number");
+          res.send(is_in_bd);
         }
 
       
