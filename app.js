@@ -7,6 +7,7 @@ export default (express, bodyParser, CORS, Num) => {
       .get('/*', async r => r.res.json(await Num.find()))
       .post('/*', async (req, res) => {
         const { number } = req.body;
+        var new_number = Number(number) + 1;
         var is_in_bd = true;
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
 
@@ -19,7 +20,7 @@ export default (express, bodyParser, CORS, Num) => {
       
           try {
             await newNum.save(); 
-            res.send(Number(number) + 1);
+            res.send(new_number);
           }catch(e) {
             res.send('Your request is not correct');
           }
