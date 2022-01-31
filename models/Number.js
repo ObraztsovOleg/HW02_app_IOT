@@ -1,6 +1,9 @@
 export default m => {
     const NumberSchema = m.Schema({
-      number: Number
+      number: {
+        type: Number,
+        required: [true, 'You need to pass a number']
+      }
     });
   
     return m.model('Num', NumberSchema);
