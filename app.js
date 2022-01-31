@@ -19,7 +19,7 @@ export default (express, bodyParser, CORS, Num) => {
       
           try {
             await newNum.save(); 
-            res.send(number + 1);
+            res.send(Number(number) + 1);
           }catch(e) {
             res.send('Your request is not correct');
           }
