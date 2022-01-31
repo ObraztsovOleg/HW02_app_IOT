@@ -7,11 +7,11 @@ export default (express, bodyParser, CORS, Num) => {
       .get('/*', async r => r.res.json(await Num.find()))
       .post('/*', async (req, res) => {
         const { number } = req.body;
-        var is_in_bd = false;
+        var is_in_bd = true;
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
 
         for (var obj in bd_data) {
-          if (Number(bd_data[obj]["number"]) == Number(number)) is_in_bd = true; 
+          if (Number(bd_data[obj]["number"]) == Number(number)) is_in_bd = false; 
         } 
 
         if (is_in_bd) {
@@ -19,15 +19,13 @@ export default (express, bodyParser, CORS, Num) => {
       
           try {
             await newNum.save(); 
-            res.status(201).send(bd_data[0]['number']);
-            // res.send(is_in_bd);
+            res.send(number + 1);
           }catch(e) {
-            res.status(400).send('Your request is not correct');
+            res.send('Your request is not correct');
           }
         } else {
 
           res.send("You've already sent this number");
-          // res.send(is_in_bd);
         }
 
       

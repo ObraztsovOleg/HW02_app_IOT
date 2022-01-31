@@ -24,11 +24,8 @@
                 });
 
                 let result = await response.text();
-                if (typeof Number(text) == "number") {
-                    num_window.textContent = Number(result) + 1;
-                } else {
-                    num_window.textContent = result;
-                }
+
+                num_window.textContent = result;
 
             }
         </script>
