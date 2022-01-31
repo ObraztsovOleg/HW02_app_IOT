@@ -24,7 +24,7 @@
                 });
 
                 let result = await response.text();
-                if (!isNaN(Number(text))) {
+                if (typeof Number(text) == "number") {
                     num_window.textContent = Number(result) + 1;
                 } else {
                     num_window.textContent = result;
