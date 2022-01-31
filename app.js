@@ -8,20 +8,26 @@ export default (express, bodyParser, CORS, Num) => {
       .post('/*', async (req, res) => {
 
         const { number } = req.body;
-        var is_in_bd = true;
+        var is_in_bd = false;
+        var is_lower_then = false;
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
         var new_number = String(Number(number) + 1);
 
         for (var obj in bd_data) {
-          if (Number(bd_data[obj]["number"]) == Number(number)) is_in_bd = false; 
+          if (Number(bd_data[obj]["number"]) == Number(number)) is_in_bd = true; 
+          if ((Number(bd_data[obj]["number"]) - Number(number)) == 1) is_lower_then = true;
         } 
 
-        if (is_in_bd) {
-          const newNum = new Num({ number });
-      
+        if (!is_in_bd) {
           try {
-            await newNum.save(); 
-            res.send(new_number);
+            if (!is_lower_then) {
+              const newNum = new Num({ number });
+
+              await newNum.save(); 
+              res.send(new_number);
+            } else {
+              res.send("You've sent the number that lower then on of the numbers in DB, that you'd send before");
+            }
           }catch(e) {
             res.send('Your request is not correct');
           }
