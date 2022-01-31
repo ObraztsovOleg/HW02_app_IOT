@@ -6,7 +6,7 @@ export default (express, bodyParser, CORS, Num) => {
       .use(bodyParser.urlencoded({ extended: true }))
       .get('/*', async r => r.res.json(await Num.find()))
       .post('/*', async (req, res) => {
-        const { number } = req.body;
+        // const { number } = req.body;
         var bd_data = json(await Num.find());
 
         // const newNum = new Num({ number });
