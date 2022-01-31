@@ -7,7 +7,7 @@ export default (express, bodyParser, CORS, Num) => {
       .get('/*', async r => r.res.json(await Num.find()))
       .post('/*', async (req, res) => {
         const { number } = req.body;
-        var new_number = Number(number) + 1;
+        var new_number = Number(number);
         var is_in_bd = true;
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
 
