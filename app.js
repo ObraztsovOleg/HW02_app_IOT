@@ -6,10 +6,11 @@ export default (express, bodyParser, CORS, Num) => {
       .use(bodyParser.urlencoded({ extended: true }))
       .get('/*', async r => r.res.json(await Num.find()))
       .post('/*', async (req, res) => {
+
         const { number } = req.body;
-        var new_number = Number(number);
         var is_in_bd = true;
         var bd_data = JSON.parse(JSON.stringify(await Num.find()));
+        var new_number = String(Number(number) + 1);
 
         for (var obj in bd_data) {
           if (Number(bd_data[obj]["number"]) == Number(number)) is_in_bd = false; 
